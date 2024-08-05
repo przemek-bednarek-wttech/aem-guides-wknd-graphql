@@ -40,6 +40,23 @@
                             }
                         }
                     }
+                },
+                {
+                    "title": "Accordion Item",
+                    "id": "accordion-item",
+                    "plugins": {
+                        "aem": {
+                            "page": {
+                                "resourceType": "straumann/components/container",
+                                "name": "item",
+                                "template": {
+                                    "resourceType": "straumann/components/container",
+                                    "jcr:title": "jcr:title - Next Item",
+                                    "cq:panelTitle": "cq:panelTitle - Next Item"
+                                }
+                            }
+                        }
+                    }
                 }
             ]
         },

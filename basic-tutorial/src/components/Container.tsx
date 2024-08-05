@@ -6,6 +6,7 @@ import { componentMapper } from "../componentsmapper.ts";
 
 const Container = (props: any) => {
     const path = props.path ?? props.pagePath + "/jcr:content/" + props.componentSubpath;
+    const disableChildEditing = props.model == "experience-fragment";
     const { container, error } = useContainerByPath(props, path);
 
     if (error) {
@@ -16,16 +17,18 @@ const Container = (props: any) => {
 
     return (
         <div
-            className="container"
-            data-aue-model={props.model ?? ""}
-            data-aue-resource={`urn:aemconnection:${path}`} 
-            data-aue-type="container">
+            className={props.className ?? "container"}
+            data-aue-model={!props.disableEditing ? props.model ?? "" : ""}
+            data-aue-resource={!props.disableEditing ? `urn:aemconnection:${path}` : ""} 
+            data-aue-type={!props.disableEditing ? "container" : ""}
+            data-aue-label={props.dataLabel ?? "Container"}>
           {container[":itemsOrder"] && container[":itemsOrder"].length > 0 && 
           (<div className="container-list">
             {container[":itemsOrder"].map((itemName) => {
                 const item = container[":items"][itemName];
                 if (item) {
                     item.path = path + "/" + itemName;
+                    item.disableEditing = disableChildEditing || props.disableEditing;
                 }
                 const type = componentMapper.get(item?.[":type"]);
 

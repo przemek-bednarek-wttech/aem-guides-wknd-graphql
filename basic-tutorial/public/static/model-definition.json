@@ -1,19 +1,34 @@
 [
     {
-        "id": "accordion-item-container",
+      "id": "experience-fragment",
+      "fields": [
+        {
+          "component": "aem-experience-fragment",
+          "name": "fragmentVariationPath",
+          "label": "Experience Fragment Picker",
+          "valueType": "string",
+          "variationName": "experienceFragmentVariation"
+        }
+      ]
+    },
+    {
+      "id": "accordion",
+      "fields": [
+      ]
+    },
+    {
+        "id": "accordion-item",
         "fields": [
           {
             "component": "text",
             "name": "jcr:title",
-            "value": "Item ?",
             "label": "Jcr Title",
             "valueType": "string"
           },
           {
             "component": "text",
             "name": "cq:panelTitle",
-            "value": "Item ?",
-            "label": "cq:Panel Title",
+            "label": "Panel Title",
             "valueType": "string"
           }
         ]

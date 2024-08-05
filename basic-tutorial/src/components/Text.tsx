@@ -6,14 +6,14 @@ const Text = (props: any) => {
 
     return (
         <div className={"text-content" + cssClasses}
-            data-aue-resource={`urn:aemconnection:${props.path}`} 
-            data-aue-type="component"
-            data-aue-label="Text"
-            data-aue-model="text">
+            data-aue-resource={!props.disableEditing ? `urn:aemconnection:${props.path}` : ""} 
+            data-aue-type={!props.disableEditing ? "component" : ""}
+            data-aue-label={!props.disableEditing ? "Text" : ""}
+            data-aue-model={!props.disableEditing ? "text" : ""}>
             <div className="text-inner-content" 
-                data-aue-prop="text" 
-                data-aue-type="richtext" 
-                data-aue-label="Text"
+                data-aue-prop={!props.disableEditing ? "text" : ""}
+                data-aue-type={!props.disableEditing ? "richtext" : ""}
+                data-aue-label={!props.disableEditing ? "Text" : ""}
                 dangerouslySetInnerHTML={{__html: text}}>
             </div>
         </div>

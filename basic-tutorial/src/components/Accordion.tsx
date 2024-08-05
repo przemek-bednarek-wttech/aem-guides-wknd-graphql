@@ -1,34 +1,33 @@
 import React from "react";
 import { StgAccordionGroup } from "@stg/harmonix-component-library";
-import Container from "./Container.tsx";
+import AccordionItem from "./AccordionItem.tsx";
 
 const Accordion = (props: any) => {
-    //const path = props.pagePath + "/jcr:content/" + props.componentSubpath;
-    //const { container, error } = useContainerByPath(path);
-
-    // if (error) {
-    //     return <Error errorMessage={error} />;
-    // } else if (!container) {
-    //     return <Loading />;
-    // }
 
     const data = props[":itemsOrder"].map((itemName) => {
         const childItem = props[":items"][itemName];
         if (childItem) {
-            childItem.path = props.path + "/" + itemName;
-        }
+            const childItemPath = props.path + "/" + itemName
+            childItem.path = childItemPath;
+            childItem.key = childItemPath;
 
-        return {
-            ariacontrols: childItem.accessibilityLabel,
-            children: <Container {...childItem} model="accordion-item-container"/>,
-            content: "",
-            title: childItem.panelTitle,
+            return {
+                ariacontrols: childItem.accessibilityLabel,
+                children: <AccordionItem {...childItem}/>,
+                content: "",
+                title: childItem.panelTitle,
+            }
+        } else {
+            return null;
         }
     });
 
     return (
-        <div className={"accordion-content"}>
-            <p className="debug">-----------------Accordion-----------------</p>
+        <div className={"accordion-content"}
+            data-aue-model="accordion"
+            data-aue-resource={`urn:aemconnection:${props.path}`} 
+            data-aue-type="container"
+            data-aue-label="Accordion">
             <StgAccordionGroup 
               data={data}
             />
