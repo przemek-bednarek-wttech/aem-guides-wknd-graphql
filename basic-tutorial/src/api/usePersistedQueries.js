@@ -46,10 +46,7 @@ async function fetchPersistedQuery(persistedQueryName, queryParameters) {
     data = response?.data;
   } catch (e) {
     // An error occurred, return the error messages
-    err = e
-      .toJSON()
-      ?.map((error) => error.message)
-      ?.join(", ");
+    err = e.toJSON()?.message;
     console.error(e.toJSON());
   }
 
@@ -57,6 +54,69 @@ async function fetchPersistedQuery(persistedQueryName, queryParameters) {
   return { data, err };
 }
 
+/**
+ * Custom hook that calls the 'my-project/components-by-container-path' persisted query.
+ *
+ * @returns an array of Team JSON objects, and array of errors
+ */
+export function useContainerByPath(path) {
+  const [container, setContainer] = useState(null);
+  const [error, setError] = useState(null);
+
+  // Use React useEffect to manage state changes
+  useEffect(() => {
+    async function fetchData() {
+      // Call the AEM GraphQL persisted query named "my-project/components-by-container-path"
+      const { data, err } = await fetchPersistedQuery(
+        "my-project/container-by-path",
+        { path }
+      );
+      // Sets the items variable to the list of team JSON objects
+      setContainer(data?.containerByPath?.item);
+      // Set any errors
+      setError(err);
+    }
+    // Call the internal fetchData() as per React best practices
+    fetchData();
+  }, [path]);
+
+  return { container, error };
+}
+
+/**
+ * Custom hook that calls the 'my-project/button-by-path' persisted query.
+ *
+ * @returns an array of Team JSON objects, and array of errors
+ */
+export function useButtonByPath(props, path) {
+  const [button, setButton] = useState(null);
+  const [error, setError] = useState(null);
+
+  // Use React useEffect to manage state changes
+  useEffect(() => {
+    async function fetchData() {
+      // Call the AEM GraphQL persisted query named "my-project/button-by-path"
+      const { data, err } = await fetchPersistedQuery(
+        "my-project/button-by-path",
+        { path }
+      );
+      // Sets the button item variable to the list of team JSON objects
+      setButton(data?.buttonByPath?.item);
+      // Set any errors
+      setError(err);
+    }
+    // Call the internal fetchData() as per React best practices
+
+    if (props) {
+      setButton(props);
+    } else {
+      fetchData();
+    }
+  }, [props, path]);
+
+  // Returns the button and errors
+  return { button, error };
+}
 
 /**
  * Custom hook that calls the 'my-project/all-teams' persisted query.
@@ -94,7 +154,7 @@ export function useAllTeams() {
  * @param {String!} fullName the full
  * @returns a JSON object representing the person
  */
-export function usePersonByName(fullName) {
+export function usePersonByName(props, fullName) {
   const [person, setPerson] = useState(null);
   const [errors, setErrors] = useState(null);
 
@@ -120,8 +180,13 @@ export function usePersonByName(fullName) {
         setErrors(`Cannot find person with name: ${fullName}`);
       }
     }
-    fetchData();
-  }, [fullName]);
+
+    if (props) {
+      setPerson(props);
+    } else {
+      fetchData();
+    }
+  }, [props, fullName]);
 
   return { person, errors };
 }

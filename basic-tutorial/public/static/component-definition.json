@@ -1,0 +1,89 @@
+{
+    "groups": [
+        {
+            "title": "General Components",
+            "id": "general",
+            "components": [
+                {
+                    "title": "Text",
+                    "id": "text",
+                    "plugins": {
+                        "aem": {
+                            "page": {
+                                "resourceType": "straumann/components/text",
+                                "template": {
+                                    "text": "This is a new text"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "title": "Accordion",
+                    "id": "accordion",
+                    "plugins": {
+                        "aem": {
+                            "page": {
+                                "resourceType": "straumann/components/accordion",
+                                "template": {
+                                    "item_1": {
+                                        "resourceType": "straumann/components/container",
+                                        "jcr:title": "jcr:title - Item 1",
+                                        "cq:panelTitle": "cq:panelTitle - Item 1"
+                                    },
+                                    "item_2": {
+                                        "resourceType": "straumann/components/container",
+                                        "jcr:title": "jcr:title - Item 2",
+                                        "cq:panelTitle": "cq:panelTitle - Item 2"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        {
+        "title": "Content Fragments",
+        "id": "content-fragments",
+        "components": [
+            {
+            "title": "Person",
+            "id": "person",
+            "plugins": {
+                "aem": {
+                    "cf": {
+                        "name": "person",
+                        "cfModel": "/conf/my-project/settings/dam/cfm/models/person",
+                        "cfFolder": "/content/dam/my-project/en",
+                        "title": "person",
+                        "template": {
+                            "fullName": "New Person",
+                            "biographyText": "This is biography of new person"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "title": "Button",
+                "id": "button",
+                "plugins": {
+                    "aem": {
+                        "cf": {
+                            "name": "button",
+                            "cfModel": "/conf/my-project/settings/dam/cfm/models/button",
+                            "cfFolder": "/content/dam/my-project/en/buttons",
+                            "title": "button",
+                            "template": {
+                                "label": "New Button",
+                                "href": "href"
+                                }
+                            }
+                        }
+                    }
+                }
+        ]
+        }
+    ]
+}

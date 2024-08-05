@@ -1,0 +1,91 @@
+[
+    {
+        "id": "accordion-item-container",
+        "fields": [
+          {
+            "component": "text",
+            "name": "jcr:title",
+            "value": "Item ?",
+            "label": "Jcr Title",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "name": "cq:panelTitle",
+            "value": "Item ?",
+            "label": "cq:Panel Title",
+            "valueType": "string"
+          }
+        ]
+    },
+    {
+      "id": "text",
+      "fields": [
+        {
+          "component": "richtext",
+          "name": "text",
+          "value": "Text",
+          "label": "Custom Text",
+          "valueType": "string"
+        }
+      ]
+    },
+    {
+        "id": "button",
+        "fields": [
+          {
+            "component": "text",
+            "name": "label",
+            "value": "Label",
+            "label": "Label",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "name": "ariaLabel",
+            "value": "",
+            "label": "Aria Label",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "name": "linkUrl",
+            "value": "https://",
+            "label": "Link URL",
+            "valueType": "string"
+          },
+          {
+            "component": "boolean",
+            "name": "extendedLink",
+            "value": "false",
+            "label": "Open in new tab",
+            "valueType": "boolean"
+          },
+          {
+            "component": "select",
+            "name": "icon",
+            "value": "",
+            "label": "Icon",
+            "valueType": "string",
+            "options": [
+                { "name": "None", "value": "" },
+                { "name": "Add", "value": "add" },
+                { "name": "Phone", "value": "phone" }
+              ]
+          },
+          {
+            "component": "select",
+            "name": "type",
+            "value": "primary",
+            "label": "Type",
+            "valueType": "string",
+            "options": [
+                { "name": "Primary", "value": "primary" },
+                { "name": "Secondary", "value": "secondary" },
+                { "name": "Tertiary", "value": "tertiary" }
+              ]
+          }
+        ]
+      }
+]
+  

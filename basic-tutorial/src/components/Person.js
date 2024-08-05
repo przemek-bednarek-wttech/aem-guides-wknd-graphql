@@ -15,12 +15,12 @@ import Error from "./Error";
 import Loading from "./Loading";
 import "./Person.scss";
 
-function Person() {
+function Person(props) {
   // Read the person's `fullName` which is the parameter used to query for the person's details
   const { fullName } = useParams();
 
   // Query AEM for the Person's details, using the `fullName` as the filtering parameter
-  const { person, error } = usePersonByName(fullName);
+  const { person, error } = usePersonByName(props, fullName);
 
   // Handle error and loading conditions
   if (error) {
@@ -34,11 +34,11 @@ function Person() {
     <div className="person">
       <img
         className="person__image"
-        src={process.env.REACT_APP_HOST_URI+person.profilePicture._path}
+        src={process.env.REACT_APP_HOST_URI+person.profilePicture?._path}
         alt={person.fullName}
       />
       <div className="person__occupations">
-        {person.occupation.map((occupation, index) => {
+        {person.occupation?.map((occupation, index) => {
           return (
             <span key={index} className="person__occupation">
               {occupation}

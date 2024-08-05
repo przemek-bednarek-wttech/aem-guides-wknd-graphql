@@ -11,6 +11,8 @@ it.
 @import '~normalize-scss/sass/normalize';
 @import './styles/variables';
 
+@import "@stg/design-tokens/dist/styles/complete-variables/straumann.css";
+
 body {
     background-color: $body-bg;
     font-family: $font-family-base;
@@ -147,4 +149,16 @@ button {
   width: 100%;
   left: 0;
   text-align: center;
+}
+
+.debug {
+  display: none;
+}
+
+.container-list {
+  list-style: none;
+}
+
+.container {
+  padding-top: 40px;
 }

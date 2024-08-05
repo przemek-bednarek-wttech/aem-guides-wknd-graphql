@@ -8,6 +8,7 @@ it.
 */
 import React from "react";
 import Teams from "./Teams";
+import Container from "./Container.tsx";
 import "./Home.scss";
 
 /***
@@ -18,6 +19,7 @@ function Home() {
     <div className="home">
       <h2 className="home__title">WKND Teams</h2>
       <Teams />
+      <Container componentSubpath="root/container" />
     </div>
   );
 }

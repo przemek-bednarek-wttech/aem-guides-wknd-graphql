@@ -9,7 +9,7 @@ it.
 
 import React from "react";
 import { Link } from "react-router-dom";
-import { useAllTeams } from "../api/usePersistedQueries";
+import { useAllTeams, useButtonByPath } from "../api/usePersistedQueries";
 import Error from "./Error";
 import Loading from "./Loading";
 import "./Teams.scss";
@@ -35,23 +35,23 @@ function Teams() {
 }
 
 // Render single Team
-function Team({ title, shortName, description, teamMembers }) {
+function Team({  _path, title, shortName, description, teamMembers }) {
   // Must have title, shortName and at least 1 team member
-  if (!title || !shortName || !teamMembers) {
+  if (!_path || !title || !shortName || !teamMembers) {
     return null;
   }
 
   return (
-    <div className="team">
-      <h2 className="team__title">{title}</h2>
-      <p className="team__description">{description.plaintext}</p>
-      <div>
+    <div className="team" data-aue-resource={`urn:aemconnection:${_path}/jcr:content/data/master`} data-aue-type="reference" data-aue-label={title}>
+      <h2 className="team__title" data-aue-prop="title" data-aue-type="text" data-aue-label="title">{title}</h2>
+      <p className="team__description" data-aue-prop="description" data-aue-type="richtext" data-aue-label="description">{description.plaintext}</p>
+      <div data-aue-prop="teamMembers" data-aue-type="container" data-aue-label="members">
         <h4 className="team__members-title">Members</h4>
         <ul className="team__members">
           {/* Render the referenced Person models associated with the team */}
           {teamMembers.map((teamMember, index) => {
             return (
-              <li key={index} className="team__member">
+              <li key={index} className="team__member" data-aue-resource={`urn:aemconnection:${teamMember?._path}/jcr:content/data/master`} data-aue-type="component" data-aue-label={teamMember.fullName}>
                 <Link to={`/person/${teamMember.fullName}`}>
                   {teamMember.fullName}
                 </Link>
