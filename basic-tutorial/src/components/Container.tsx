@@ -3,6 +3,7 @@ import Error from "./Error";
 import Loading from "./Loading";
 import { useContainerByPath } from "../api/useRegularContentQueries.ts";
 import { componentMapper } from "../componentsmapper.ts";
+import { DataAueAttributes, getDataAueAttributes } from "../commons/dataAueAttributes.ts";
 
 const Container = (props: any) => {
     const path = props.path ?? props.pagePath + "/jcr:content/" + props.componentSubpath;
@@ -15,13 +16,14 @@ const Container = (props: any) => {
         return <Loading />;
     }
 
+    const dataAueAttributes = getDataAueAttributes(props, "Container", "container", "container", path)
+
     return (
         <div
             className={props.className ?? "container"}
-            data-aue-model={!props.disableEditing ? props.model ?? "" : ""}
-            data-aue-resource={!props.disableEditing ? `urn:aemconnection:${path}` : ""} 
-            data-aue-type={!props.disableEditing ? "container" : ""}
-            data-aue-label={props.dataLabel ?? "Container"}>
+            key={props.key}
+            {...dataAueAttributes}
+            >
           {container[":itemsOrder"] && container[":itemsOrder"].length > 0 && 
           (<div className="container-list">
             {container[":itemsOrder"].map((itemName) => {
@@ -33,7 +35,7 @@ const Container = (props: any) => {
                 const type = componentMapper.get(item?.[":type"]);
 
                 if (type) {
-                    return <div key={itemName}> {React.createElement(type, item)} </div>;
+                    return <div key={item.path}> {React.createElement(type, item)} </div>;
                 } else {
                     return null;
                 }

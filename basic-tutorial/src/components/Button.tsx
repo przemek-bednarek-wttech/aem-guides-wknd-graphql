@@ -1,5 +1,6 @@
 import React from "react";
 import { StgButton } from "@stg/harmonix-component-library";
+import { getDataAueAttributes } from "../commons/dataAueAttributes.ts";
 
 interface ButtonType {
     path: string;
@@ -13,12 +14,11 @@ interface ButtonType {
 
 const Button = (props: ButtonType) => {
 
+    const dataAueAttributes = getDataAueAttributes(props, "Button", "button", "compomnent")
+
     return (
         <StgButton
-            data-aue-resource={`urn:aemconnection:${props.path}`} 
-            data-aue-type="component" 
-            data-aue-label="Button"
-            data-aue-model="button"
+            {...dataAueAttributes}
             href={props.linkUrl}
             target={props.extendedLink ? "_blank" : undefined}
             aria-label={props.ariaLabel}

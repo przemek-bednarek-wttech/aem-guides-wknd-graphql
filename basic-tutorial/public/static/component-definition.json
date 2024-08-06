@@ -5,6 +5,20 @@
             "id": "general",
             "components": [
                 {
+                    "title": "Button",
+                    "id": "button",
+                    "plugins": {
+                        "aem": {
+                            "page": {
+                                "resourceType": "straumann/components/stgbutton",
+                                "template": {
+                                    "label": "New Button"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
                     "title": "Text",
                     "id": "text",
                     "plugins": {

@@ -1,19 +1,18 @@
 import React from "react";
+import { getDataAueAttributes, getDataAueRichtextAttributes } from "../commons/dataAueAttributes.ts";
 
 const Text = (props: any) => {
     const text = props.text;
     const cssClasses = props.cssClasses ? " " + props.cssClasses : "";
 
+    const dataAueAttributes = getDataAueAttributes(props, "Text", "text", "component");
+    const textEdit = getDataAueRichtextAttributes(props);
+
     return (
         <div className={"text-content" + cssClasses}
-            data-aue-resource={!props.disableEditing ? `urn:aemconnection:${props.path}` : ""} 
-            data-aue-type={!props.disableEditing ? "component" : ""}
-            data-aue-label={!props.disableEditing ? "Text" : ""}
-            data-aue-model={!props.disableEditing ? "text" : ""}>
+            {...dataAueAttributes}>
             <div className="text-inner-content" 
-                data-aue-prop={!props.disableEditing ? "text" : ""}
-                data-aue-type={!props.disableEditing ? "richtext" : ""}
-                data-aue-label={!props.disableEditing ? "Text" : ""}
+                {...textEdit}
                 dangerouslySetInnerHTML={{__html: text}}>
             </div>
         </div>

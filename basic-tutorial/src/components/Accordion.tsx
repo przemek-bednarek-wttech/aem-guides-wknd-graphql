@@ -1,6 +1,7 @@
 import React from "react";
 import { StgAccordionGroup } from "@stg/harmonix-component-library";
 import AccordionItem from "./AccordionItem.tsx";
+import { getDataAueAttributes } from "../commons/dataAueAttributes.ts";
 
 const Accordion = (props: any) => {
 
@@ -22,12 +23,11 @@ const Accordion = (props: any) => {
         }
     });
 
+    const dataAueAttributes = getDataAueAttributes(props, "Accordion", "accordion", "container")
+
     return (
         <div className={"accordion-content"}
-            data-aue-model="accordion"
-            data-aue-resource={`urn:aemconnection:${props.path}`} 
-            data-aue-type="container"
-            data-aue-label="Accordion">
+            {...dataAueAttributes}>
             <StgAccordionGroup 
               data={data}
             />
